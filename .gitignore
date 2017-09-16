@@ -1,0 +1,14 @@
+/.awcache/
+/.idea/
+/.gradle/
+/build/
+/classes/
+/coverage/
+/node_modules/
+/src/main/resources/static/
+/out/
+/reactive-products.iml
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
