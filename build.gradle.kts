@@ -8,9 +8,9 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-  val springVersion = "5.0.0.RC4"
-  val springBootVersion = "2.0.0.M4"
-  val kotlinVersion = "1.1.4-3"
+  val springVersion = "5.0.0.RELEASE"
+  val springBootVersion = "2.0.0.M5"
+  val kotlinVersion = "1.1.51"
   extra["springVersion"] = springVersion
   extra["springBootVersion"] = springBootVersion
   extra["kotlinVersion"] = kotlinVersion
