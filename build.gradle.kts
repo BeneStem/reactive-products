@@ -8,9 +8,9 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-  val springVersion = "5.0.0.RELEASE"
-  val springBootVersion = "2.0.0.M5"
-  val kotlinVersion = "1.1.51"
+  val springVersion = "5.0.2.RELEASE"
+  val springBootVersion = "2.0.0.M7"
+  val kotlinVersion = "1.2.10"
   extra["springVersion"] = springVersion
   extra["springBootVersion"] = springBootVersion
   extra["kotlinVersion"] = kotlinVersion
@@ -20,7 +20,7 @@ buildscript {
     maven { setUrl("https://repo.spring.io/milestone") }
   }
   dependencies {
-    classpath("com.github.ben-manes:gradle-versions-plugin:0.15.0")
+    classpath("com.github.ben-manes:gradle-versions-plugin:0.17.0")
     classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
     classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
   }
@@ -60,7 +60,9 @@ dependencies {
   "compile"("org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion")
   "compile"("org.springframework.boot:spring-boot-starter-data-mongodb-reactive:$springBootVersion")
 
+  "compile"("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
   "compile"("org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion")
+  "compile"("org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion")
   "compile"("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
   "compile"("io.projectreactor:reactor-kotlin-extensions:1.0.0.M2")
 
@@ -71,7 +73,7 @@ dependencies {
 
   "testCompile"("io.projectreactor.addons:reactor-test:3.1.0.M1")
   "testCompile"("com.nhaarman:mockito-kotlin:1.5.0")
-  "testCompile"("com.natpryce:hamkrest:1.4.2.0")
+  "testCompile"("com.natpryce:hamkrest:1.4.2.2")
 }
 
 apply {
