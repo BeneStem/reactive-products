@@ -12,11 +12,15 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.time.Duration
 
-@RestController @RequestMapping("/products") class ProductRestController(val productService: ProductService) {
+@RestController
+@RequestMapping("/products")
+class ProductRestController(private val productService: ProductService) {
 
-  @GetMapping fun findAll(@RequestParam(name = "take") count: Long, sort: Sort): Flux<Product> = productService.findAll(sort)
+  @GetMapping
+  fun findAll(@RequestParam(name = "take") count: Long, sort: Sort): Flux<Product> = productService.findAll(sort)
     .take(count)
     .delayElements(Duration.ofMillis(500))
 
-  @GetMapping("/{id}") fun findById(@PathVariable id: String): Mono<Product> = productService.findById(id)
+  @GetMapping("/{id}")
+  fun findById(@PathVariable id: String): Mono<Product> = productService.findById(id)
 }

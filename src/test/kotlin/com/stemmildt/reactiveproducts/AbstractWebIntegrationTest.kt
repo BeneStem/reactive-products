@@ -6,13 +6,15 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDO
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.web.reactive.server.WebTestClient
 
-@SpringBootTest(webEnvironment = RANDOM_PORT) abstract class AbstractWebIntegrationTest : AbstractIntegrationTest() {
+@SpringBootTest(webEnvironment = RANDOM_PORT)
+abstract class AbstractWebIntegrationTest : AbstractIntegrationTest() {
 
-  @LocalServerPort var port: Int? = null
+  @LocalServerPort private var port: Int? = null
 
   lateinit var client: WebTestClient
 
-  @Before fun setupWebTestClient() {
+  @Before
+  fun setupWebTestClient() {
     client = WebTestClient.bindToServer()
       .baseUrl("http://localhost:$port")
       .build()

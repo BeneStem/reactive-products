@@ -22,9 +22,10 @@ import java.util.Date
 
 internal class ProductRestControllerWebIntegrationTest : AbstractWebIntegrationTest() {
 
-  @MockBean lateinit var productServiceMock: ProductService
+  @MockBean private lateinit var productServiceMock: ProductService
 
-  @Test fun `Find all products`() {
+  @Test
+  fun `Find all products`() {
     // given
     val productId1 = "100334202"
     val productId2 = "100334203"
@@ -40,14 +41,15 @@ internal class ProductRestControllerWebIntegrationTest : AbstractWebIntegrationT
       .returnResult<Product>()
 
     // then
-    assert.that(sortArgumentCaptor.firstValue.getOrderFor("id").direction, equalTo(DESC))
+    assert.that(sortArgumentCaptor.firstValue.getOrderFor("id")!!.direction, equalTo(DESC))
     StepVerifier.create(result.responseBody)
       .consumeNextWith({ assert.that(it.id, equalTo(productId1)) })
       .consumeNextWith({ assert.that(it.id, equalTo(productId2)) })
       .verifyComplete()
   }
 
-  @Test fun `Find no products`() {
+  @Test
+  fun `Find no products`() {
     // given
     given(productServiceMock.findAll(unsorted())).willReturn(Flux.empty())
 
@@ -62,7 +64,8 @@ internal class ProductRestControllerWebIntegrationTest : AbstractWebIntegrationT
       .verifyComplete()
   }
 
-  @Test fun `Find product by id`() {
+  @Test
+  fun `Find product by id`() {
     // given
     val productId = "100334204"
     given(productServiceMock.findById(productId)).willReturn(Mono.just(
@@ -79,7 +82,8 @@ internal class ProductRestControllerWebIntegrationTest : AbstractWebIntegrationT
       .verifyComplete()
   }
 
-  @Test fun `Find no product by id`() {
+  @Test
+  fun `Find no product by id`() {
     // given
     val productId = "100334200"
     given(productServiceMock.findById(productId)).willReturn(Mono.empty())

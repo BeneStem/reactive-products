@@ -1,6 +1,6 @@
 package com.stemmildt.reactiveproducts.product.domain
 
-data class Dimension (
+data class Dimension(
   val type: Type,
   val colorName: String,
   val baseColor: String?

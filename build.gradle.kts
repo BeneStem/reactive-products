@@ -56,22 +56,22 @@ val kotlinVersion = extra["kotlinVersion"] as String
 dependencies {
   "compileOnly"("org.springframework:spring-context-indexer:$springVersion")
 
-  "compile"("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
-  "compile"("org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion")
   "compile"("org.springframework.boot:spring-boot-starter-data-mongodb-reactive:$springBootVersion")
+  "compile"("org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion")
+  "compile"("org.springframework.boot:spring-boot-starter-webflux:$springBootVersion")
 
   "compile"("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
   "compile"("org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion")
   "compile"("org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion")
   "compile"("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
-  "compile"("io.projectreactor:reactor-kotlin-extensions:1.0.0.M2")
+  "compile"("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.3")
 
   "runtime"("org.springframework.boot:spring-boot-devtools:$springBootVersion")
 
-  "testCompile"("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
   "testCompile"("de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.0.0")
+  "testCompile"("io.projectreactor:reactor-test:3.1.2.RELEASE")
+  "testCompile"("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
 
-  "testCompile"("io.projectreactor.addons:reactor-test:3.1.0.M1")
   "testCompile"("com.nhaarman:mockito-kotlin:1.5.0")
   "testCompile"("com.natpryce:hamkrest:1.4.2.2")
 }
