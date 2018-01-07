@@ -29,8 +29,10 @@ class ProductList extends React.Component<ProductListProps> {
     const count = 100;
     Rx.DOM.fromEventSource(`/products?take=${count}`)
       .take(count)
-      .subscribe((product: string) => {
-        this.props.dispatch(addProduct(JSON.parse(product)));
+      .subscribe((product: {}) => {
+        if (typeof product === 'string') {
+          this.props.dispatch(addProduct(JSON.parse(product)));
+        }
       });
   }
 }
