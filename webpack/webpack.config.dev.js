@@ -10,15 +10,16 @@ const webpack = require('webpack');
 
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FriendlyErrors = require('friendly-errors-webpack-plugin');
-const DashboardPlugin = require('webpack-dashboard/plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const {CheckerPlugin, TsConfigPathsPlugin} = require('awesome-typescript-loader');
-const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+// const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  mode: 'development',
+  devtool: 'source-map',
   target: 'web',
   entry: {
     main: [
@@ -45,9 +46,9 @@ module.exports = {
     pathinfo: true,
     filename: 'js/[name].js',
     chunkFilename: 'js/[name].chunk.js',
-    publicPath: '/',
+    publicPath: './',
     devtoolModuleFilenameTemplate: (info) => {
-      return path.resolve(info.absoluteResourcePath);
+      return path.relative(path.resolve(appDirectory, 'src/client'), info.absoluteResourcePath);
     }
   },
   devServer: {
@@ -114,7 +115,7 @@ module.exports = {
         ],
         loader: 'file-loader',
         options: {
-          name: 'media/[name].[ext]'
+          name: 'media/[name].[hash:8].[ext]'
         }
       },
       {
@@ -129,7 +130,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 10000,
-              name: 'media/[name].[ext]'
+              name: 'media/[name].[hash:8].[ext]'
             }
           },
           {
@@ -168,20 +169,15 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         include: path.resolve(appDirectory, 'src/client'),
-        use: [
-          {
-            loader: 'awesome-typescript-loader',
-            options: {
-              useBabel: true
-            }
-          }
-        ]
+        loader: 'awesome-typescript-loader',
+        options: {
+          useBabel: true
+        }
       },
       {
         test: /\.css$/,
         use: [
-          // isomorphic-style-loader
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -214,6 +210,12 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
+    runtimeChunk: true
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -223,16 +225,14 @@ module.exports = {
       __DEVTOOLS__: true
     }),
     new FriendlyErrors(),
-    new DashboardPlugin(),
     new CaseSensitivePathsPlugin(),
     new CheckerPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new WatchMissingNodeModulesPlugin(path.resolve(appDirectory, 'node_modules')),
+    // new WatchMissingNodeModulesPlugin(path.resolve(appDirectory, 'node_modules')),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'js/[name].js'
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash:8].css'
     }),
     new HtmlWebpackPlugin({
       inject: true,
@@ -240,9 +240,11 @@ module.exports = {
     })
   ],
   node: {
+    gram: 'empty',
     fs: 'empty',
     net: 'empty',
-    tls: 'empty'
+    tls: 'empty',
+    child_process: 'empty'
   },
   performance: {
     hints: false

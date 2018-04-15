@@ -5,8 +5,8 @@
 /classes/
 /coverage/
 /node_modules/
-/src/main/resources/static/
 /out/
+/src/main/resources/static/
 /reactive-products.iml
 .DS_Store
 npm-debug.log*

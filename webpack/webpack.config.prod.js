@@ -10,7 +10,8 @@ const webpack = require('webpack');
 
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const {CheckerPlugin, TsConfigPathsPlugin} = require('awesome-typescript-loader');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -19,9 +20,8 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
-const cssFilename = 'css/[name].[contenthash:8].css';
-
 module.exports = {
+  mode: 'production',
   bail: true,
   devtool: 'source-map',
   target: 'web',
@@ -151,43 +151,73 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract(Object.assign({
-          fallback: 'style-loader',
-          use: [
-            // isomorphic-style-loader
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-                modules: true,
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-                importLoaders: 1,
-                minimize: true
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: () => {
-                  return [
-                    require('postcss-import')(), // eslint-disable-line global-require
-                    require('stylelint')(), // eslint-disable-line global-require
-                    require('postcss-flexbugs-fixes'), // eslint-disable-line global-require
-                    require('postcss-cssnext')({ // eslint-disable-line global-require
-                      browsers: [
-                        'last 2 versions',
-                        'ie 9'
-                      ],
-                      flexbox: 'no-2009'
-                    })
-                  ];
-                }
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+              importLoaders: 1,
+              minimize: true
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => {
+                return [
+                  require('postcss-import')(), // eslint-disable-line global-require
+                  require('stylelint')(), // eslint-disable-line global-require
+                  require('postcss-flexbugs-fixes'), // eslint-disable-line global-require
+                  require('postcss-cssnext')({ // eslint-disable-line global-require
+                    browsers: [
+                      'last 2 versions',
+                      'ie 9'
+                    ],
+                    flexbox: 'no-2009'
+                  })
+                ];
               }
             }
-          ]
-        }, {publicPath: new Array(cssFilename.split('/').length).join('../')}))
+          }
+        ]
       }
     ]
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: {
+            warnings: false,
+            comparisons: false
+          },
+          mangle: {
+            safari10: true
+          },
+          output: {
+            comments: false,
+            ascii_only: true
+          }
+        },
+        parallel: true,
+        cache: true,
+        sourceMap: true
+      }),
+      new OptimizeCssAssetsPlugin({
+        cssProcessorOptions: {
+          discardComments: {
+            removeAll: true
+          }
+        }
+      })
+    ],
+    splitChunks: {
+      chunks: 'all'
+    },
+    runtimeChunk: true
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -200,45 +230,8 @@ module.exports = {
     new CheckerPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-        drop_console: true,
-        drop_debugger: true,
-        global_defs: {
-          __REACT_HOT_LOADER__: undefined // eslint-disable-line no-undefined
-        },
-        reduce_vars: true
-      },
-      minimize: true,
-      debug: false,
-      output: {
-        comments: false
-      },
-      sourceMap: true
-    }),
-    new ExtractTextPlugin({
-      filename: cssFilename
-    }),
-    new OptimizeCssAssetsPlugin({
-      cssProcessorOptions: {
-        discardComments: {
-          removeAll: true
-        }
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'js/[name].[chunkhash:8].js'
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash:8].css'
     }),
     new HtmlWebpackPlugin({
       inject: true,
@@ -269,7 +262,7 @@ module.exports = {
     new OfflinePlugin({
       ServiceWorker: {
         events: true,
-        minify: true,
+        minify: false,
         navigateFallback: '/index.html'
       }
     }),
@@ -293,9 +286,11 @@ module.exports = {
     })
   ],
   node: {
+    dgram: 'empty',
     fs: 'empty',
     net: 'empty',
-    tls: 'empty'
+    tls: 'empty',
+    child_process: 'empty'
   },
   performance: {
     hints: 'warning'
