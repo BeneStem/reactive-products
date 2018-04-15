@@ -101,6 +101,7 @@
     "jsdoc-format": true,
     "jsx-alignment": true,
     "jsx-ban-props": true,
+    "jsx-ban-elements": true,
     "jsx-boolean-value": true,
     "jsx-curly-spacing": [
       true,

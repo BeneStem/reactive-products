@@ -1,0 +1,60 @@
+server:
+  port: "${PORT:4242}"
+  servlet.context-path: "/reactive-products"
+  tomcat:
+    accesslog:
+      enabled: true
+      pattern: "combined"
+management:
+  metrics.distribution:
+      percentiles.http.server.requests: "0.95, 0.99"
+      percentiles-histogram.http.server.requests: true
+      sla.http.server.requests: "10ms, 100ms"
+  health.diskspace.enabled: false
+  endpoints.web:
+    base-path: "/internal"
+    exposure.include: "*"
+info:
+  build:
+    commit: "${breuninger.status.vcs.commit:}"
+    version: "${breuninger.status.vcs.version:}"
+spring:
+  application.name: "reactive-products"
+  thymeleaf.mode: "HTML"
+  data.mongodb.database: "reactive-products"
+  jackson.default-property-inclusion: NON_ABSENT
+breuninger:
+  application:
+    title: "reactive-products"
+    group: "arch"
+    environment: "${GROUP:local}"
+    description: "Make breuninger products reactive."
+    management.base-path: "/internal"
+  status:
+    team:
+      name: "arch"
+      technical-contact: "bene@breuninger.de"
+      business-contact: "bene@breuninger.de"
+  gracefulshutdown.enabled: false
+  mongo:
+    host: "localhost"
+    db: "reactive-products"
+    maxWaitTime: 50
+    connectTimeout: 150
+    defaultReadTimeout: 1500
+    defaultWriteTimeout: 1500
+    serverSelectionTimeout: 800
+    connectionpool:
+      minSize: 1
+      maxSize: 100
+      blocked-connection-multiplier: 2
+  ldap:
+    enabled: false
+    baseDn[0]: "ou=otto,ou=people,dc=lhotse,dc=otto,dc=de"
+    baseDn[1]: "ou=tools,ou=people,dc=lhotse,dc=otto,dc=de"
+    role-base-dn: "ou=mesos,ou=groups,dc=lhotse,dc=otto,dc=de"
+    host: "ldap.lhotse.ov.otto.de"
+    port: 389
+    rdn-identifier: "uid"
+    prefix: "/internal"
+    whitelisted-paths: "/internal/health,/internal/status,/internal/jobdefinitions"
