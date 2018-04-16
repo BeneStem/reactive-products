@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html layout:decorate="~{../static/index}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>Products</title>
 </head>
 <body>
-<noscript>
-  You need to enable JavaScript to run this app.
-</noscript>
-<div id="root"></div>
+<th:block layout:fragment="content">
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root"></div>
+</th:block>
 </body>
 </html>

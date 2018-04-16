@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
+import * as Rx from 'rx-dom';
 
 import {Product} from '../Product';
 import ProductCard from './ProductCard';
@@ -27,12 +28,14 @@ class ProductList extends React.Component<ProductListProps> {
 
   private loadProducts(): void {
     const count = 100;
-    Rx.DOM.fromEventSource(`/products?take=${count}`)
+    Rx.DOM.fromEventSource(`./products?take=${count}`)
       .take(count)
       .subscribe((product: {}) => {
         if (typeof product === 'string') {
           this.props.dispatch(addProduct(JSON.parse(product)));
         }
+      }, () => {
+        alert('empty stream');
       });
   }
 }
