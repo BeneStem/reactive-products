@@ -32,7 +32,6 @@ buildscript {
   val gradlePlugins = extra["gradlePlugins"] as Map<*, *>
 
   repositories {
-    mavenLocal()
     jcenter()
     maven { setUrl("https://plugins.gradle.org/m2/") }
     maven { setUrl("https://oss.sonatype.org/content/repositories/snapshots/") }
@@ -46,7 +45,6 @@ buildscript {
 }
 
 repositories {
-  mavenLocal()
   jcenter()
   maven { setUrl("https://oss.sonatype.org/content/repositories/snapshots/") }
 }
