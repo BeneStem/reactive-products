@@ -10,7 +10,7 @@ import {addProduct} from '../productAction';
 interface ProductListProps {
   products: Product[];
 
-  dispatch: Dispatch<{}>;
+  dispatch: Dispatch;
 }
 
 class ProductList extends React.Component<ProductListProps> {
@@ -34,8 +34,6 @@ class ProductList extends React.Component<ProductListProps> {
         if (typeof product === 'string') {
           this.props.dispatch(addProduct(JSON.parse(product)));
         }
-      }, () => {
-        alert('empty stream');
       });
   }
 }

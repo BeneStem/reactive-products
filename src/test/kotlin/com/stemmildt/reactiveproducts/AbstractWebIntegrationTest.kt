@@ -9,7 +9,8 @@ import org.springframework.test.web.reactive.server.WebTestClient
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 abstract class AbstractWebIntegrationTest : AbstractIntegrationTest() {
 
-  @LocalServerPort private var port: Int? = null
+  @LocalServerPort
+  private var port: Int? = null
 
   lateinit var client: WebTestClient
 

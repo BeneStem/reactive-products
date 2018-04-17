@@ -11,7 +11,7 @@ import App from './App';
 
 import './index.css';
 
-const store: Store<any> = createStore(rootReducer);
+const store: Store = createStore(rootReducer);
 
 const render = (Component: any): void => {
   const root = (

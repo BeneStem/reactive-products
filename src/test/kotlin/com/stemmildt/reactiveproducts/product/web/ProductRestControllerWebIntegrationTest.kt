@@ -5,7 +5,6 @@ import com.natpryce.hamkrest.equalTo
 import com.nhaarman.mockito_kotlin.argumentCaptor
 import com.nhaarman.mockito_kotlin.given
 import com.stemmildt.reactiveproducts.AbstractWebIntegrationTest
-import com.stemmildt.reactiveproducts.product.domain.Brand
 import com.stemmildt.reactiveproducts.product.domain.Product
 import com.stemmildt.reactiveproducts.product.service.ProductService
 import org.junit.Test
@@ -18,11 +17,11 @@ import org.springframework.test.web.reactive.server.returnResult
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import reactor.test.StepVerifier
-import java.util.Date
 
 internal class ProductRestControllerWebIntegrationTest : AbstractWebIntegrationTest() {
 
-  @MockBean private lateinit var productServiceMock: ProductService
+  @MockBean
+  private lateinit var productServiceMock: ProductService
 
   @Test
   fun `Find all products`() {
@@ -30,9 +29,8 @@ internal class ProductRestControllerWebIntegrationTest : AbstractWebIntegrationT
     val productId1 = "100334202"
     val productId2 = "100334203"
     val sortArgumentCaptor = argumentCaptor<Sort>()
-    given(productServiceMock.findAll(sortArgumentCaptor.capture())).willReturn(Flux.just(
-      Product(productId1, Brand("testBrand"), listOf(), listOf(), Date(), Date()),
-      Product(productId2, Brand("testBrand"), listOf(), listOf(), Date(), Date())))
+    given(productServiceMock.findAll(sortArgumentCaptor.capture())).willReturn(
+      Flux.just(Product(productId1), Product(productId2)))
 
     // when
     val result = client.get().uri("/products?take=10&sort=id,desc")
@@ -68,8 +66,7 @@ internal class ProductRestControllerWebIntegrationTest : AbstractWebIntegrationT
   fun `Find product by id`() {
     // given
     val productId = "100334204"
-    given(productServiceMock.findById(productId)).willReturn(Mono.just(
-      Product(productId, Brand("testBrand"), listOf(), listOf(), Date(), Date())))
+    given(productServiceMock.findById(productId)).willReturn(Mono.just(Product(productId)))
 
     // when
     val result = client.get().uri("/products/$productId")
