@@ -26,6 +26,7 @@ open class WebMvcConfiguration : WebMvcConfigurer {
   }
 
   override fun addCorsMappings(registry: CorsRegistry?) {
+    // TODO also add config for prod and dev on server side and only add this in dev mode
     registry?.addMapping("/**")?.allowedOrigins("http://localhost:3000")
   }
 }
