@@ -3,6 +3,7 @@ import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import * as Rx from 'rx-dom';
 
+import Config from '../../config';
 import {Product} from '../Product';
 import ProductCard from './ProductCard';
 import {addProduct} from '../productAction';
@@ -28,7 +29,7 @@ class ProductList extends React.Component<ProductListProps> {
 
   private loadProducts(): void {
     const count = 100;
-    Rx.DOM.fromEventSource(`./products?take=${count}`)
+    Rx.DOM.fromEventSource(`${Config.apiRoot}/products?take=${count}`)
       .take(count)
       .subscribe((product: {}) => {
         if (typeof product === 'string') {
