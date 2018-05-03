@@ -262,7 +262,7 @@ module.exports = {
     new OfflinePlugin({
       ServiceWorker: {
         events: true,
-        minify: false,
+        minify: true,
         navigateFallback: '/index.html'
       }
     }),

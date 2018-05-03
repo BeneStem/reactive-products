@@ -1,5 +1,5 @@
 val versions = mapOf(
-  Pair("kotlin", "1.2.31"),
+  Pair("kotlin", "1.2.41"),
   Pair("thymeleaf", "3.0.9.RELEASE"),
   Pair("thymeleaf-layout-dialect", "2.3.0"),
   Pair("lombok", "1.16.21"),
@@ -37,8 +37,8 @@ val libraries = mapOf(
   // revert to maven repository once 1.16.21 is released
   Pair("lombok", "libs/lombok-edge.jar"),
   Pair("kotlin-stdlib", "org.jetbrains.kotlin:kotlin-stdlib:${versions["kotlin"]}"),
-  Pair("kotlin-stdlib-jre8", "org.jetbrains.kotlin:kotlin-stdlib-jre8:${versions["kotlin"]}"),
-  Pair("kotlin-stdlib-jre7", "org.jetbrains.kotlin:kotlin-stdlib-jre7:${versions["kotlin"]}"),
+  Pair("kotlin-stdlib-jre8", "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions["kotlin"]}"),
+  Pair("kotlin-stdlib-jre7", "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions["kotlin"]}"),
   Pair("kotlin-reflect", "org.jetbrains.kotlin:kotlin-reflect:${versions["kotlin"]}"),
   Pair("jackson-module-kotlin", "com.fasterxml.jackson.module:jackson-module-kotlin:${versions["jackson-module-kotlin"]}"),
   Pair("findbugs-annotations", "com.google.code.findbugs:annotations:${versions["findbugs"]}"),

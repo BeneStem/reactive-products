@@ -1,6 +1,5 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdates
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-import jdk.nashorn.internal.runtime.regexp.joni.Regex
 import org.gradle.api.JavaVersion
 import org.gradle.api.artifacts.ResolutionStrategy
 import org.gradle.api.plugins.JavaPluginConvention
@@ -102,19 +101,5 @@ tasks {
 
   withType<BootRun> {
     systemProperties = System.getProperties().mapKeys { entry -> entry.key.toString() }.toMap()
-  }
-
-  "dependencyUpdates"(DependencyUpdatesTask::class) {
-    resolutionStrategy = closureOf<ResolutionStrategy> {
-      componentSelection {
-        all {
-          val alphaBetaPattern = Regex("^.*[\\.-](alpha|beta|b|rc|cr|m|ea|incubating|atlassian|snap)[\\.\\w\\d-]*$",
-            RegexOption.IGNORE_CASE)
-          if (candidate.version.matches(alphaBetaPattern)) {
-            reject("Rejected by alpha/beta revision: $candidate")
-          }
-        }
-      }
-    }
   }
 }
