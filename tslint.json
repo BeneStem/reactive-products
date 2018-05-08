@@ -107,11 +107,14 @@
       true,
       "never"
     ],
+    "jsx-equals-spacing": true,
+    "jsx-key": true,
     "jsx-no-bind": true,
     "jsx-no-lambda": true,
     "jsx-no-multiline-js": true,
     "jsx-no-string-ref": true,
     "jsx-self-close": true,
+    "jsx-space-before-trailing-slash": true,
     "jsx-use-translation-function": false,
     "jsx-wrap-multiline": true,
     "label-position": true,
@@ -280,6 +283,7 @@
     "prefer-readonly": true,
     "prefer-switch": true,
     "prefer-template": true,
+    "prefer-while": true,
     "promise-function-async": false,
     "quotemark": [
       true,
@@ -315,6 +319,10 @@
     "strict-type-predicates": true,
     "switch-default": true,
     "switch-final-break": true,
+    "ter-no-proto": true,
+    "ter-no-script-url": true,
+    "ter-no-self-compare": true,
+    "ter-padded-blocks": true,
     "trailing-comma": [
       true,
       {
