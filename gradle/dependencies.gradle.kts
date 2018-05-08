@@ -4,7 +4,7 @@ val versions = mapOf(
   Pair("thymeleaf-layout-dialect", "2.3.0"),
   Pair("lombok", "1.16.21"),
   Pair("findbugs", "3.0.1"),
-  Pair("spring", "5.0.5.RELEASE"),
+  Pair("spring", "5.0.6.RELEASE"),
   Pair("hibernate-validator", "6.0.9.Final"),
   Pair("owasp-java-html-sanitizer", "20171016.1"),
   Pair("spring-boot", "2.0.1.RELEASE"),
@@ -21,7 +21,7 @@ val testVersions = mapOf(
   Pair("embed-mongo", "2.0.3"),
   Pair("mockito-core", "2.18.0"),
   Pair("hamcrest-optional", "1.0"),
-  Pair("reactor", "3.1.6.RELEASE"),
+  Pair("reactor", "3.1.7.RELEASE"),
   Pair("mockito-kotlin", "1.5.0"),
   Pair("hamkrest", "1.4.2.2")
 )
