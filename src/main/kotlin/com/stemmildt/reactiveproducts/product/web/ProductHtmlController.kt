@@ -13,5 +13,5 @@ class ProductHtmlController {
 
   @Timed("html.products.findAll")
   @GetMapping(produces = [TEXT_HTML_VALUE])
-  fun findAll(): ModelAndView = ModelAndView("productOverviewPage.html");
+  fun findAll(): ModelAndView = ModelAndView("productOverviewPage.html")
 }
