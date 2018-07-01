@@ -113,6 +113,7 @@
     "function-whitespace-after": "always",
     "indentation": 2,
     "keyframe-declaration-no-important": true,
+    "keyframes-name-pattern": ".*",
     "length-zero-no-unit": true,
     "max-empty-lines": 1,
     "media-feature-colon-space-after": "always",

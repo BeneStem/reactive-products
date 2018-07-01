@@ -322,7 +322,10 @@
     "ter-no-proto": true,
     "ter-no-script-url": true,
     "ter-no-self-compare": true,
-    "ter-padded-blocks": true,
+    "ter-padded-blocks": [
+      "error",
+      "never"
+    ],
     "trailing-comma": [
       true,
       {

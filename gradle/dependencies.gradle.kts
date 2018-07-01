@@ -1,13 +1,13 @@
 val versions = mapOf(
-  Pair("kotlin", "1.2.41"),
+  Pair("kotlin", "1.2.50"),
   Pair("thymeleaf", "3.0.9.RELEASE"),
   Pair("thymeleaf-layout-dialect", "2.3.0"),
-  Pair("lombok", "1.16.21"),
+  Pair("lombok", "1.16.22"),
   Pair("findbugs", "3.0.1"),
-  Pair("spring", "5.0.6.RELEASE"),
+  Pair("spring", "5.0.7.RELEASE"),
   Pair("hibernate-validator", "6.0.9.Final"),
   Pair("owasp-java-html-sanitizer", "20171016.1"),
-  Pair("spring-boot", "2.0.1.RELEASE"),
+  Pair("spring-boot", "2.0.3.RELEASE"),
   Pair("spring-boot-starter-breuninger", "2.0.0-m2-SNAPSHOT"),
   Pair("edison-hal", "2.0.0-m1"),
   Pair("jongo", "1.4.0"),
@@ -15,27 +15,26 @@ val versions = mapOf(
   Pair("edison-vault", "2.0.4"),
   Pair("handy-uri-templates", "2.1.6"),
   Pair("httpclient", "4.5.5"),
-  Pair("jackson-module-kotlin", "2.9.5")
+  Pair("jackson-module-kotlin", "2.9.6")
 )
 val testVersions = mapOf(
-  Pair("embed-mongo", "2.0.3"),
+  Pair("embed-mongo", "2.1.1"),
   Pair("mockito-core", "2.18.0"),
   Pair("hamcrest-optional", "1.0"),
-  Pair("reactor", "3.1.7.RELEASE"),
+  Pair("reactor", "3.1.8.RELEASE"),
   Pair("mockito-kotlin", "1.5.0"),
   Pair("hamkrest", "1.4.2.2")
 )
 val pluginVersions = mapOf(
-  Pair("git-properties", "1.4.21"),
-  Pair("versions", "0.17.0"),
+  Pair("git-properties", "1.5.1"),
+  Pair("versions", "0.20.0"),
   Pair("checkstyle", "8.9"),
   Pair("jacoco", "0.8.1"),
   Pair("pmd", "5.8.1")
 )
 
 val libraries = mapOf(
-  // revert to maven repository once 1.16.21 is released
-  Pair("lombok", "libs/lombok-edge.jar"),
+  Pair("lombok", "org.projectlombok:lombok:${versions["lombok"]}"),
   Pair("kotlin-stdlib", "org.jetbrains.kotlin:kotlin-stdlib:${versions["kotlin"]}"),
   Pair("kotlin-stdlib-jre8", "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions["kotlin"]}"),
   Pair("kotlin-stdlib-jre7", "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions["kotlin"]}"),
