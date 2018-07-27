@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
-import java.time.Duration
 
 @RestController
 @RequestMapping("/products")
@@ -21,7 +20,6 @@ class ProductRestController(private val productService: ProductService) {
   @GetMapping
   fun findAll(@RequestParam(name = "take") count: Long, sort: Sort): Flux<Product> = productService.findAll(sort)
     .take(count)
-    .delayElements(Duration.ofMillis(500))
 
   @Timed("rest.products.findById")
   @GetMapping("/{id}")

@@ -1,5 +1,5 @@
 val versions = mapOf(
-  Pair("kotlin", "1.2.50"),
+  Pair("kotlin", "1.2.51"),
   Pair("thymeleaf", "3.0.9.RELEASE"),
   Pair("thymeleaf-layout-dialect", "2.3.0"),
   Pair("lombok", "1.16.22"),

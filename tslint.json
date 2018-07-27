@@ -87,6 +87,10 @@
     "encoding": true,
     "eofline": true,
     "forin": true,
+    "file-name-casing": [
+      true,
+      "pascal-case"
+    ],
     "handle-callback-err": true,
     "import-spacing": true,
     "indent": [
