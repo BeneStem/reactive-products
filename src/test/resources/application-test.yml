@@ -1,1 +1,3 @@
-breuninger.mongo.db: "reactive-products-test"
+breuninger:
+  mongo.db: "reactive-products-test"
+  jobs.watcher.enabled: false

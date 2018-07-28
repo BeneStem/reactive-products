@@ -12,7 +12,7 @@ management:
       sla.http.server.requests: "10ms, 100ms"
   health.diskspace.enabled: false
   endpoints.web:
-    base-path: "/internal"
+    base-path: "/actuator"
     exposure.include: "*"
 info:
   build:
@@ -48,6 +48,7 @@ breuninger:
       minSize: 1
       maxSize: 100
       blocked-connection-multiplier: 2
+  jobs.watcher.enabled: true
   ldap:
     enabled: false
     baseDn[0]: "ou=otto,ou=people,dc=lhotse,dc=otto,dc=de"
