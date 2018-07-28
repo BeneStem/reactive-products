@@ -14,7 +14,7 @@ enum Features implements Feature {
    * FeatureManagerSupport.enable(TEST_TOGGLE);
    */
 
-  @Label("TEST_TOGGLE_2") TEST_TOGGLE_2;
+  @Label("FEATURE_TEST") FEATURE_TEST;
 
   public boolean isActive() {
     return FeatureContext.getFeatureManager().isActive(this);
