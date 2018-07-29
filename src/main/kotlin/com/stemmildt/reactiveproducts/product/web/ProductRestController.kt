@@ -1,5 +1,6 @@
 package com.stemmildt.reactiveproducts.product.web
 
+import com.stemmildt.reactiveproducts.Feature
 import com.stemmildt.reactiveproducts.product.domain.Product
 import com.stemmildt.reactiveproducts.product.service.ProductService
 import io.micrometer.core.annotation.Timed
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import java.time.Duration
 
 @RestController
 @RequestMapping("/products")
@@ -18,8 +20,13 @@ class ProductRestController(private val productService: ProductService) {
 
   @Timed("rest.products.findAll")
   @GetMapping
-  fun findAll(@RequestParam(name = "take") count: Long, sort: Sort): Flux<Product> = productService.findAll(sort)
-    .take(count)
+  fun findAll(@RequestParam(name = "take") count: Long, sort: Sort): Flux<Product> =
+    if (Feature.REST_PRODUCTS_FINDALL.isActive())
+      productService.findAll(sort)
+        .take(count)
+        .delayElements(Duration.ofMillis(500))
+    else
+      Flux.empty()
 
   @Timed("rest.products.findById")
   @GetMapping("/{id}")
