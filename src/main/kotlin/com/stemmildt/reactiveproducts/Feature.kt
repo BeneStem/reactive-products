@@ -12,5 +12,5 @@ enum class Feature {
 
 @Component
 class FeaturesClassProvider : FeatureClassProvider {
-  override fun getFeatureClass(): Class<out Enum<*>> = Feature::class.java
+  override fun getFeatureClass() = Feature::class.java
 }
