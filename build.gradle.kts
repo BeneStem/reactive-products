@@ -14,28 +14,58 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 version = "1.0.0-SNAPSHOT"
 
-apply { from("$rootDir/gradle/dependencies.gradle.kts") }
+buildscript {
+  project.apply {
+    from("$rootDir/gradle/dependencies.gradle.kts")
+  }
+  val gradlePlugins = extra["gradlePlugins"] as Map<*, *>
+
+  repositories {
+    maven { setUrl("https://plugins.gradle.org/m2/") }
+    mavenCentral()
+    jcenter()
+    maven { setUrl("https://oss.sonatype.org/content/repositories/snapshots/") }
+    maven { setUrl("https://jitpack.io") }
+  }
+  dependencies {
+    classpath(gradlePlugins["kotlin-gradle-plugin"] as String)
+    classpath(gradlePlugins["kotlin-allopen"] as String)
+    classpath(gradlePlugins["kotlin-noarg"] as String)
+    classpath(gradlePlugins["spring-boot"] as String)
+    classpath(gradlePlugins["versions"] as String)
+    classpath(gradlePlugins["git-properties"] as String)
+
+  }
+}
+
+apply {
+  plugin("idea")
+  plugin("kotlin")
+  plugin("kotlin-spring")
+  plugin("org.springframework.boot")
+  plugin("io.spring.dependency-management")
+  plugin("com.github.ben-manes.versions")
+  plugin("com.gorylenko.gradle-git-properties")
+}
+
+repositories {
+  mavenCentral()
+  jcenter()
+  maven { setUrl("https://oss.sonatype.org/content/repositories/snapshots/") }
+  maven { setUrl("https://jitpack.io") }
+}
 
 val versions = extra["versions"] as Map<*, *>
 val libraries = extra["libraries"] as Map<*, *>
 val testLibraries = extra["testLibraries"] as Map<*, *>
 
-plugins {
-  kotlin("jvm") version "1.2.51"
-  idea
-  id("com.gorylenko.gradle-git-properties") version "1.5.1"
-  id("org.springframework.boot") version "2.0.3.RELEASE"
-  id("com.github.ben-manes.versions") version "0.20.0"
-}
-
-repositories {
-  mavenLocal()
-  jcenter()
-  maven { setUrl("https://oss.sonatype.org/content/repositories/snapshots/") }
-}
-
+ext["groovy.version"] = versions["groovy"]
 ext["thymeleaf.version"] = versions["thymeleaf"]
 ext["thymeleaf-layout-dialect.version"] = versions["thymeleaf-layout-dialect"]
+
+val compile by configurations
+val compileOnly by configurations
+val testCompile by configurations
 
 dependencies {
   compileOnly(libraries["spring-context-indexer"] as String)
@@ -48,9 +78,7 @@ dependencies {
   compile(libraries["spring-boot-starter-breuninger-mongo"] as String)
   compile(libraries["spring-boot-starter-breuninger-togglz"] as String)
 
-  compile(libraries["kotlin-stdlib"] as String)
   compile(libraries["kotlin-stdlib-jre8"] as String)
-  compile(libraries["kotlin-stdlib-jre7"] as String)
   compile(libraries["kotlin-reflect"] as String)
   compile(libraries["jackson-module-kotlin"] as String)
 
@@ -77,6 +105,7 @@ configure<JavaPluginConvention> {
 tasks {
   withType<KotlinCompile> {
     kotlinOptions {
+      freeCompilerArgs = listOf("-Xjsr305=strict")
       jvmTarget = org.gradle.api.JavaVersion.VERSION_1_8.toString()
     }
   }

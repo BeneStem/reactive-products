@@ -2,6 +2,7 @@ import org.gradle.api.tasks.testing.Test
 import org.gradle.kotlin.dsl.withType
 
 tasks.withType<Test> {
+  useJUnitPlatform()
   options {
     jvmArgs("-XX:SoftRefLRUPolicyMSPerMB=0", "-XX:+UseParallelGC", "-noverify")
   }

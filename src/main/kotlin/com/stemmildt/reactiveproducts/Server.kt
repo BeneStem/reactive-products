@@ -12,21 +12,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @SpringBootApplication
 @PropertySource("version.properties")
 @ComponentScan("com.breuninger.boot", "com.stemmildt.reactiveproducts")
-open class Server
+class Server
 
 fun main(args: Array<String>) {
   runApplication<Server>(*args)
 }
 
 @Configuration
-open class WebMvcConfiguration : WebMvcConfigurer {
+class WebMvcConfiguration : WebMvcConfigurer {
 
   override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
     registry.addResourceHandler("/**").addResourceLocations("classpath:/static/")
   }
 
-  override fun addCorsMappings(registry: CorsRegistry?) {
+  override fun addCorsMappings(registry: CorsRegistry) {
     // TODO also add config for prod and dev on server side and only add this in dev mode
-    registry?.addMapping("/**")?.allowedOrigins("http://localhost:3000")
+    registry.addMapping("/**").allowedOrigins("http://localhost:3000")
   }
 }
