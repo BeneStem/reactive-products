@@ -34,7 +34,6 @@ buildscript {
     classpath(gradlePlugins["spring-boot"] as String)
     classpath(gradlePlugins["versions"] as String)
     classpath(gradlePlugins["git-properties"] as String)
-
   }
 }
 

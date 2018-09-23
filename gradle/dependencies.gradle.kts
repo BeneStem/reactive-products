@@ -1,34 +1,34 @@
 val versions = mapOf(
-  "kotlin" to "1.2.60",
+  "kotlin" to "1.2.70",
   "thymeleaf" to "3.0.9.RELEASE",
   "thymeleaf-layout-dialect" to "2.3.0",
   "lombok" to "1.18.2",
   "findbugs" to "3.0.1",
-  "spring" to "5.0.8.RELEASE",
+  "spring" to "5.1.0.RELEASE",
   "hibernate-validator" to "6.0.11.Final",
-  "owasp-java-html-sanitizer" to "20171016.1",
-  "spring-boot" to "2.0.4.RELEASE",
-  "spring-boot-starter-breuninger" to "2.0.3.RELEASE",
+  "owasp-java-html-sanitizer" to "20180219.1",
+  "spring-boot" to "2.0.5.RELEASE",
+  "spring-boot-starter-breuninger" to "2.0.5.RELEASE",
   "edison-hal" to "2.0.1",
   "jongo" to "1.4.0",
   "bson4jackson" to "2.9.0",
   "edison-vault" to "2.0.4",
   "handy-uri-templates" to "2.1.6",
   "httpclient" to "4.5.5",
-  "jackson-module-kotlin" to "2.9.6",
+  "jackson-module-kotlin" to "2.9.7",
   "groovy" to "2.5.1"
 )
 val testVersions = mapOf(
   "embed-mongo" to "2.1.1",
   "mockito-core" to "2.20.1",
   "hamcrest-optional" to "1.0",
-  "reactor" to "3.1.8.RELEASE",
+  "reactor" to "3.2.0.RELEASE",
   "mockito-kotlin" to "1.6.0",
-  "hamkrest" to "1.4.2.2"
+  "hamkrest" to "1.6.0.0"
 )
 val pluginVersions = mapOf(
   "versions" to "0.20.0",
-  "git-properties" to "1.5.1",
+  "git-properties" to "1.5.2",
   "checkstyle" to "8.9",
   "jacoco" to "0.8.1",
   "pmd" to "5.8.1"
